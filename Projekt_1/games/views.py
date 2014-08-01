@@ -7,3 +7,8 @@ def index(request):
     context = RequestContext(request)
 
     return render_to_response('games/index.html', {}, context)
+
+def staroverflow(request):
+    context = RequestContext(request)
+    
+    return render_to_response('games/staroverflow.html', {}, context)

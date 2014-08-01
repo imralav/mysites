@@ -5,42 +5,6 @@
  	border-color: white;
  	border-width: 1px;
 } */
-
-p {
-	color: #E3AE57;
-}
-
-table {
-	display:inline-block;
-}
-body {
-	background-color: #232B2B;
-}
-
-a {
-	text-decoration:none;
-	margin: 5px;
-}
-a:link {
-	color: #FFFFFF;
-}
-a:visited {
-	color: #FFFFFF;
-}
-a:hover {
-	color: #DC3D24;
-}
-a:active {
-	color: #4D5454;
-}
-
-tr {
-	margin: 5px;
-}
-
-td {
-	padding: 5px;
-}
 /***************** NAWIGATOR ******************/
 #navigator {
 	-moz-border-radius: 15px;
@@ -66,22 +30,6 @@ td {
 }
 
 /***************** CONTENT ********************/
-#content {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	text-align: center;
-}
-#content .container {
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border-color: #4D5454;
-	border-width: 1px;
-	border-style: solid;
-	padding: 15px;
-	margin-left: 125px;
-	margin-right: 125px;
-}
-
 #content .container .election_utils {
 	font-size: 12px;
 }
@@ -143,7 +91,8 @@ td {
 .newspanel {
 }
 
-.newspanel .post {
+
+#content .container .newspanel .post {
 	border-top-style: solid;
 	border-top-color: #4D5454;
 	border-width: 1px;
@@ -157,7 +106,7 @@ td {
 	border-bottom-color: #4D5454;
 }
 
-.newspanel .post h3 {
+#content .container .newspanel .post h3 {
 	margin-top: 0px;
 	margin-bottom: 0px;
 	padding: 0px;

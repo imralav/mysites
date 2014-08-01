@@ -1,0 +1,30 @@
+{% extends 'games/base.html' %}
+
+{% block title %}Star Overflow{% endblock %}
+{% block head %}
+	{{ block.super }}
+    <link type="text/css" rel="stylesheet" href="/static/games/FirstGame/style.css"/>
+    <script src="/static/games/FirstGame/phaser.min.js"></script>
+    <script src="/static/games/FirstGame/Boot.js"></script>
+    <script src="/static/games/FirstGame/Main.js"></script>
+    <script src="/static/games/FirstGame/Game.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="content">
+    	<a href="/">Go back</a>
+        <div id="gameContainer"></div>
+    </div>
+	<script type="text/javascript">
+	window.onload = function() {
+	    //create new game
+	    var game = new Phaser.Game(1200,600,Phaser.AUTO,'gameContainer');
+	    //add states to the game
+	    game.state.add('Main', FirstGame.Main);
+	    game.state.add('Game', FirstGame.Game);
+	    
+	    game.state.start('Main');
+	    //game.state.start('Game');
+	}
+	</script>
+{% endblock %}

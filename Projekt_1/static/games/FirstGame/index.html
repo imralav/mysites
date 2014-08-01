@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>basic HTML5 page skeleton</title>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <script src="phaser.min.js"></script>
+    <script src="Boot.js"></script>
+    <script src="Main.js"></script>
+    <script src="Game.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="gameContainer"></div>
+    </div>
+<script type="text/javascript">
+window.onload = function() {
+    //create new game
+    var game = new Phaser.Game(1200,600,Phaser.AUTO,'gameContainer');
+    //add states to the game
+    game.state.add('Main', FirstGame.Main);
+    game.state.add('Game', FirstGame.Game);
+    
+    game.state.start('Main');
+    //game.state.start('Game');
+}
+</script>
+</body>
+</html>
+
