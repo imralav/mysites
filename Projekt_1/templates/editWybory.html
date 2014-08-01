@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+		<form class="edit_wybory" method="post" action="/wybory/editWybory/{{ whichId }}/">
+	        {% csrf_token %}
+	        {% for form in wybory_form.visible_fields %}
+	        	<p>{{ form.name|capfirst }}</p>
+	        	<p>{{ form }}</p>
+	        {% endfor %}
+	        <input type="submit" name="submit" value="Edytuj wybory"/>
+		</form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+		<form class="add_news" method="post" action="/wybory/addnews/">
+	        {% csrf_token %}
+	        {% for form in news_form.visible_fields %}
+	        	<p>{{ form.name|capfirst }}</p>
+	        	{{ form }}
+	        {% endfor %}
+	        <input type="submit" name="submit" value="Dodaj post"/>
+		</form>
+{% endblock %}

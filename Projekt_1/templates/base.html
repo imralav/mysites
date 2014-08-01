@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+    	<link type="text/css" rel="stylesheet" href="/static/style.css"/>
+        <title>{% block title %}WYBORY.{% endblock %}</title>
+        {% block head %}
+        {% endblock %}
+    </head>
+
+    <body>
+    	<div id="navigator">
+    		<div class="container">
+	    	{% block navigator %}
+		    	<div class="accounts">
+		    		{% if user.is_authenticated %}
+		    			<a href="/wybory/logout/">Wyloguj "{{ user.username }}"</a> |
+		    			<!--<a href="/wybory/{{ user.username }}/twojewybory/">Twoje glosy</a> |-->
+		    			<a href="/wybory/{{ user.username }}/profile/">Twoje dane</a>
+		    		{% else %}
+		    			<a href="/wybory/login/">Zaloguj się</a> |
+		    			<a href="/wybory/register/">Zarejestruj się</a>
+		    		{% endif %}
+		    	</div>
+		    	<div class="links">
+		    		<a href="/wybory/">Strona główna</a> |
+		    		{% if user.is_authenticated %}
+		    		<a href="/wybory/addWybory/">Dodaj wybory</a> |
+		    		{% endif %}
+		    		<a href="/wybory/lista/3">Najnowsze wybory</a> |
+		    		<a href="/wybory/lista/">Lista wyborów</a>
+		    	</div>
+	    	{% endblock %}
+	    	</div>
+    	</div>
+    	<!--
+    	<div class="nav_filler">
+    	</div>
+    	-->
+    	<div id="content">
+    		<div class="container">
+		    	{% block content %}
+		    	{% endblock %}
+	    	</div>
+    	</div>
+    	<div id="footer">
+    		<div class="container">
+		    	{% block footer %}
+			    	{% if user.is_superuser %}
+			    		<a href="/admin/">Made by MJ, MZ, TK</a>
+			    	{% else %}
+			    		<a>Made by MZ, MJ, TK</a>
+			    	{% endif %}
+		    	{% endblock %}
+	    	</div>
+    	</div>
+    </body>
+</html>

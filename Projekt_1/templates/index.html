@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="newspanel">
+		{% if user.is_superuser %}
+			<div class="add_news">
+				<a href="/wybory/addnews/">Dodaj newsa</a>
+			</div>
+		{% endif %}
+		{% if posty %}
+			{% for news in posty %}
+				{% if forloop.last %}
+					<div class="post last">
+				{% else %}
+					<div class="post">
+				{% endif %}
+						<h3>{{ news.tytul }}</h3>
+						<p class="date">{{ news.data_dodania }}</p>
+						<p class="tresc">{{ news.tresc|linebreaksbr }}</p>
+						{% if user.is_superuser %}
+						<div class="edit">
+							<a href="/wybory/editnews/{{ news.id }}/">Edytuj newsa</a>
+							<a href="/wybory/delnews/{{ news.id }}/">Usuń newsa</a>
+						</div>
+						{% endif %}
+					</div>
+			{% endfor %}
+		{% else %}
+			<p>Brak newsow</p>
+		{% endif %}
+		{% if user.is_superuser %}
+			<div class="add_news">
+				<a href="/wybory/addnews/">Dodaj newsa</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}
+
