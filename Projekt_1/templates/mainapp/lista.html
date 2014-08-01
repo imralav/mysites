@@ -11,14 +11,14 @@
 					<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
 				{% endif %}			
 					{% if not w.zamkniete %}	
-					<td><a class="election_utils" href="/wybory/editWybory/{{ w.id }}">edytuj</a></td>
-					<td><a class="election_utils" href="/wybory/delWybory/{{ w.id }}">usuń</a></td>
+					<td><a class="election_utils" href="/wybory/editWybory/{{ w.id }}/">edytuj</a></td>
+					<td><a class="election_utils" href="/wybory/delWybory/{{ w.id }}/">usuń</a></td>
 					{% endif %}
 					{% if user.is_superuser %}
 						{% if w.zamkniete %}
-							<td><a href="/wybory/openWybory/{{ w.id }}">otwórz</a></td>
+							<td><a href="/wybory/openWybory/{{ w.id }}/">otwórz</a></td>
 						{% else %}
-							<td><a href="/wybory/closeWybory/{{ w.id }}">zamknij</a></td>
+							<td><a href="/wybory/closeWybory/{{ w.id }}/">zamknij</a></td>
 						{% endif %}
 					{% endif %}
 			</tr>

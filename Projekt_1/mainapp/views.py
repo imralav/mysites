@@ -239,19 +239,19 @@ def editWybory(request, whichId):
 
 def delWybory(request, whichId):
     Wybory.objects.get(pk=whichId).delete()
-    return HttpResponseRedirect('/wybory/lista')
+    return HttpResponseRedirect('/wybory/lista/')
 
 def closeWybory(request, whichId):
     wybory = Wybory.objects.get(pk=whichId)
     wybory.zamkniete = True
     wybory.save()
-    return HttpResponseRedirect('/wybory/lista')
+    return HttpResponseRedirect('/wybory/lista/')
 
 def openWybory(request, whichId):
     wybory = Wybory.objects.get(pk=whichId)
     wybory.zamkniete = False
     wybory.save()
-    return HttpResponseRedirect('/wybory/lista')
+    return HttpResponseRedirect('/wybory/lista/')
 
 def wybory(request, wyboryId):
     context = RequestContext(request)
@@ -278,7 +278,7 @@ def glosuj(request, wyboryId):
         if len(wybrani) > wybory.ilosc_wyborow:
             blad = True
             error_msg = " Można wybrać jedynie "+str(wybory.ilosc_wyborow)+" kandydatów! "
-            return render_to_response('glosuj.html',{'wybory': wybory, 'blad': blad, 'error': error_msg}, context)
+            return render_to_response('mainapp/glosuj.html',{'wybory': wybory, 'blad': blad, 'error': error_msg}, context)
 
         for w in wybrani:
             kandydat = Kandydat.objects.get(pk=int(w))
