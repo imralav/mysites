@@ -1,0 +1,62 @@
+{% extends 'mainapp/base.html' %}
+
+{% block head %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Kandydat');
+        data.addColumn('number', 'Głosy');
+        data.addRows([
+        	{% for w in wyniki %}
+        		{% if not forloop.last %}
+        			['{{w.kandydat}}',{{w.dcount}}],
+        		{% else %}
+        			['{{w.kandydat}}',{{w.dcount}}]
+        		{% endif %}
+        	{% endfor %}
+        ]);
+
+        // Set chart options
+        var options = {'title':'Wyniki',
+                       'width':550,
+                       'height':450,
+                       fontSize: 14,
+                       backgroundColor: '#4D5454',
+                       is3D: true};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+<div class="results">
+	<h3>Wyniki: {{wybory}}</h3>
+	<table>
+		{% for w in wyniki %}
+			<tr><td><p><a href="/wybory/{{k.profil.user.username}}/profile/">{{ w.kandydat }}</a>- {{ w.dcount }}</p></td></tr>
+		{% endfor %}
+	</table>
+</div>
+
+<div id="wykres">
+	<div id="chart_div"></div>
+</div>
+</center>
+{% endblock %}

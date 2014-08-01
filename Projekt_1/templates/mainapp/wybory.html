@@ -1,0 +1,64 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+	<div class="election_details" id="election_requirements">
+		<h4> Wymagania: </h4>
+		<p>Wymagany wiek: {{ wybory.wymagany_wiek }}</p>
+		{% if wybory.wymagana_niekaralnosc %}
+			<p>Wymagana niekaralnosc</p>
+		{% endif %}
+		<p>Wymagane zawody:</p>
+		<ul>
+		{% for z in wybory.wymagane_zawody.all %}
+			<li><p>{{z}}</p></li>
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="election_details" id="election_general_info">
+		<h3>
+			{{wybory}} 
+			{% if wybory.zamkniete %}
+				*ZAMKNIETE*
+			{% endif %}
+		</h3>
+		<p>utworzone przez <a href="/wybory/{{ wybory.ktoStworzyl.username }}/profile/">{{ creator }}</a></p>
+		<p>Dostępne od {{ wybory.poczatek }} do {{ wybory.koniec }}.</p>
+		<p>Ilość wyborów: {{wybory.ilosc_wyborow }}</p>
+		<p>Opis:</p>
+		<p id="election_description">{{ wybory.opis|linebreaksbr }}</p>
+		<br/>
+		
+		{% if user.is_authenticated %}
+			{% if wybory.zamkniete %}
+				<a href="/wybory/wyniki/{{wybory.id}}/">Wyniki</a>
+			{% else %}
+				<a href="/wybory/glosuj/{{wybory.id}}/">Głosuj</a>
+			{% endif %}
+			
+			{% if user = wybory.ktoStworzyl or user.is_superuser %}
+					{% if not wybory.zamkniete %}
+					<a href="/wybory/editWybory/{{ wybory.id }}">Edytuj</a>
+					<a href="/wybory/delWybory/{{ wybory.id }}">Usuń</a>
+					{% endif %}
+					{% if user.is_superuser %}
+						{% if wybory.zamkniete %}
+							<td><a href="/wybory/openWybory/{{ wybory.id }}">Otwórz</a></td>
+						{% else %}
+							<td><a href="/wybory/closeWybory/{{ wybory.id }}">Zamknij</a></td>
+						{% endif %}
+					{% endif %}
+			{% endif %}
+		{% endif %}
+	</div>
+	<div class="election_details" id="election_candidates">
+		<h4>Kandydaci:</h4>
+			{% for k in wybory.kandydaci.all %}
+				<a href="/wybory/{{k.profil.user.username}}/profile/">{{ k.profil }}</a><br/>
+			{% endfor %}
+		<br/>
+	</div>
+		
+		
+		
+		
+{% endblock %}

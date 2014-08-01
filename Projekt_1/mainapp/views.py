@@ -19,7 +19,7 @@ def index(request):
 
     posty = News.objects.filter(data_dodania__lte=datetime.now).order_by('-data_dodania')
 
-    return render_to_response('index.html', {'posty': posty}, context)
+    return render_to_response('mainapp/index.html', {'posty': posty}, context)
 
 def addNews(request):
     context = RequestContext(request)
@@ -37,7 +37,7 @@ def addNews(request):
     else:
         news_form = NewsForm()
 
-    return render_to_response('addNews.html', {'news_form': news_form}, context)
+    return render_to_response('mainapp/addNews.html', {'news_form': news_form}, context)
 
 def editNews(request,whichId):
     context = RequestContext(request)
@@ -55,7 +55,7 @@ def editNews(request,whichId):
     else:
         news_form = NewsForm(instance=newsInstance)
 
-    return render_to_response('editNews.html', {'news_form': news_form, 'whichId': whichId}, context)
+    return render_to_response('mainapp/editNews.html', {'news_form': news_form, 'whichId': whichId}, context)
 
 
 def delNews(request, whichId):
@@ -110,7 +110,7 @@ def register(request):
 
     # Render the template depending on the context.
     return render_to_response(
-            'register.html',
+            'mainapp/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
             context)
 
@@ -152,7 +152,7 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('login.html', {}, context)
+        return render_to_response('mainapp/login.html', {}, context)
 
 @login_required
 def user_logout(request):
@@ -180,13 +180,13 @@ def user_wybory(request, user_name):
     context_dict = {'dane': dane, 'glosy': glosy, 'profil': profil}
 
 
-    return render_to_response("twojewybory.html", context_dict, context)
+    return render_to_response("mainapp/twojewybory.html", context_dict, context)
 
 def newest(request):
     context = RequestContext(request)
     wybory = Wybory.objects.order_by('-poczatek')[:3]
     context_dict = {'wybory': wybory}
-    return render_to_response("newest.html", context_dict, context)
+    return render_to_response("mainapp/newest.html", context_dict, context)
 
 def lista(request, ile=None):
     context = RequestContext(request)
@@ -195,7 +195,7 @@ def lista(request, ile=None):
     else:
         wybory = Wybory.objects.order_by('-poczatek')[:ile]
     context_dict = {'wybory': wybory }
-    return render_to_response("lista.html", context_dict, context)
+    return render_to_response("mainapp/lista.html", context_dict, context)
 
 def addWybory(request):
     context = RequestContext(request)
@@ -217,7 +217,7 @@ def addWybory(request):
     else:
         wybory_form = WyboryForm()
 
-    return render_to_response('addWybory.html', {'wybory_form': wybory_form}, context)
+    return render_to_response('mainapp/addWybory.html', {'wybory_form': wybory_form}, context)
 
 def editWybory(request, whichId):
     context = RequestContext(request)
@@ -235,7 +235,7 @@ def editWybory(request, whichId):
     else:
         wybory_form = WyboryForm(instance=wyboryInstance)
 
-    return render_to_response('editWybory.html', {'wybory_form': wybory_form, 'whichId': whichId}, context)
+    return render_to_response('mainapp/editWybory.html', {'wybory_form': wybory_form, 'whichId': whichId}, context)
 
 def delWybory(request, whichId):
     Wybory.objects.get(pk=whichId).delete()
@@ -259,7 +259,7 @@ def wybory(request, wyboryId):
     creatorProfile = Profil.objects.get(user = wybory.ktoStworzyl)
 
     context_dict = {'wybory': wybory, 'creator': creatorProfile}
-    return render_to_response("wybory.html", context_dict, context)
+    return render_to_response("mainapp/wybory.html", context_dict, context)
 
 def glosuj(request, wyboryId):
     context = RequestContext(request)
@@ -288,20 +288,20 @@ def glosuj(request, wyboryId):
             glos.kandydat = kandydat
             glos.save()
 
-        return render_to_response('glosuj.html',{'wybory': wybory}, context)
+        return render_to_response('mainapp/glosuj.html',{'wybory': wybory}, context)
     else:
         kandydaci = Kandydat.objects.filter(wybory__id=wybory.id)
         if wybory.poczatek > datetime.date(datetime.now()):
             error_msg+=" Jeszcze nie można głosować w tych wyborach. "
             blad = True
             context_dict = {'blad': blad, 'error': error_msg, 'wybory': wybory, 'kandydaci': kandydaci}
-            return render_to_response('glosuj.html', context_dict, context)
+            return render_to_response('mainapp/glosuj.html', context_dict, context)
 
         if Glos.objects.filter(wybory=Wybory.objects.get(pk=wyboryId), glosujacy=_profil):
             error_msg+=" Głosowałeś już w tych wyborach. "
             blad = True
             context_dict = {'blad': blad, 'error': error_msg, 'wybory': wybory, 'kandydaci': kandydaci}
-            return render_to_response('glosuj.html', context_dict, context)
+            return render_to_response('mainapp/glosuj.html', context_dict, context)
 
         if datetime.date(datetime.now()) > wybory.koniec:
             error_msg+=" Nie można już głosować w tych wyborach. "
@@ -325,7 +325,7 @@ def glosuj(request, wyboryId):
             error_msg+=" Brak wymaganego zawodu. "
 
         context_dict = {'blad': blad, 'error': error_msg, 'wybory': wybory, 'kandydaci': kandydaci}
-        return render_to_response('glosuj.html', context_dict, context)
+        return render_to_response('mainapp/glosuj.html', context_dict, context)
 
 def wyniki(request, whichId):
     context = RequestContext(request)
@@ -337,7 +337,7 @@ def wyniki(request, whichId):
 
     print wyniki
 
-    return render_to_response('wyniki.html', context_dict, context)
+    return render_to_response('mainapp/wyniki.html', context_dict, context)
 
 def addCandidate(request):
     _user = User.objects.get(username=request.user.username)
@@ -347,7 +347,7 @@ def addCandidate(request):
     kandydat.save()
     context = RequestContext(request)
 
-    return render_to_response('addCandidate.html', {'message': "Gratulacje, zostałeś kandydatem!"}, context)
+    return render_to_response('mainapp/addCandidate.html', {'message': "Gratulacje, zostałeś kandydatem!"}, context)
 
 def profile(request, profileUsername):
     context = RequestContext(request)
@@ -357,4 +357,4 @@ def profile(request, profileUsername):
     glosy = Glos.objects.filter(glosujacy=_profil).order_by('-id')[:5]
     kandydat = Kandydat.objects.filter(profil=_profil)
     print kandydat
-    return render_to_response('profile.html', {'profil': _profil, 'wybory': wybory, 'glosy': glosy, 'czyKandydat': kandydat}, context)
+    return render_to_response('mainapp/profile.html', {'profil': _profil, 'wybory': wybory, 'glosy': glosy, 'czyKandydat': kandydat}, context)

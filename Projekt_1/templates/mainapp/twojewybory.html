@@ -1,0 +1,22 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+{{ block.super }}
+<div id="user_votes">
+	<h3>Glosy oddane przez <a href="/wybory/{{profil.user.username}}/profile/">{{profil}}</a></h3>
+	{% if dane %}
+		{% for w, glos in dane.items %}
+			<div class="election_votes">
+				<p class="election_title"><a href="/wybory/details/{{w.id}}/">W. {{ w.kategoria }} "{{ w.tytul }}":</a></p>
+				<ul>
+				{% for g in glos %}
+					<li><p>Na <a href="/wybory/{{g.kandydat.profil.user.username}}/profile/">{{ g.kandydat.profil.imie }} {{ g.kandydat.profil.nazwisko }}</a></p></li>
+				{% endfor %}
+				</ul>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>Brak glosow dla tego uzytkownika.</p>
+	{% endif %}
+</div>
+{% endblock %}

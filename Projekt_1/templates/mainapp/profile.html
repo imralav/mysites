@@ -1,0 +1,63 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+	<div class="profile_details">
+		<h3>{{ profil.imie}} {{profil.nazwisko}}</h3>
+			<p>ur. {{ profil.data_urodzenia }}</p></li>
+			<p>zawód(y):</p>
+			<ul>
+				{% for z in profil.zawod.all %}
+				<li><p>{{ z }}</p></li>
+				{% endfor %}
+			</ul>
+			<p>
+				{% if profil.karany %}
+				Karany(a)
+				{% else %}
+				Niekarany(a)
+				{% endif %}
+			</p>
+			<p>obywatelstwo(a):</p>
+			<ul>
+				{% for o in profil.obywatelstwo.all %}
+				<li><p>{{ o }}</p></li>
+				{% endfor %}
+			</ul>
+			{% if not czyKandydat %}
+				<p>Nie kandyduje</p>
+				{% if profil.user = user %}
+					<a href="/wybory/addCandidate/">Zostań kandydatem</a>
+				{% endif %}
+			{% else %}
+				<p>Kandyduje</p>
+			{% endif %}
+	</div>
+	<div style="display: inline-block;">
+		<div class="profile_details votes">
+			<h4>Ostatnie głosy:</h4>
+			{% if glosy %}
+				<ul>
+				{% for g in glosy %}
+					<li><p>Na <a href="/wybory/{{g.kandydat.profil.user.username}}/profile/">{{ g.kandydat.profil.imie }} {{ g.kandydat.profil.nazwisko }}</a> w <a href="/wybory/details/{{g.wybory.id}}/">{{ g.wybory.kategoria }} "{{ g.wybory.tytul }}"</a></p></li>
+					<!--<li><p>Na {{g.kandydat}} w W. {{g.wybory.kategoria.nazwa}} "{{g.wybory.tytul}}"</p></li>-->
+				{% endfor %}
+				</ul>
+				<a id="all_votes" href="/wybory/{{ profil.user.username }}/twojewybory/">Wszystkie glosy</a>
+			{% else %}
+				<p>Brak oddanych głosów.</p>
+			{% endif %}
+		</div>
+		<div class="profile_details elections">
+			<h4>Dodane wybory:</h4>
+			{% if wybory %}
+				<ul>
+					{% for w in wybory %}
+						<li><a href="/wybory/details/{{w.id}}/">{{w}}</a></li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>Brak dodanych wyborów.</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

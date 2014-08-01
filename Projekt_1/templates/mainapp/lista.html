@@ -1,0 +1,40 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+		<table>
+		{% for w in wybory %}
+			{% if user = w.ktoStworzyl or user.is_superuser %}
+			<tr>
+				{% if w.zamkniete %}
+					<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
+				{% else %}
+					<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
+				{% endif %}			
+					{% if not w.zamkniete %}	
+					<td><a class="election_utils" href="/wybory/editWybory/{{ w.id }}">edytuj</a></td>
+					<td><a class="election_utils" href="/wybory/delWybory/{{ w.id }}">usuń</a></td>
+					{% endif %}
+					{% if user.is_superuser %}
+						{% if w.zamkniete %}
+							<td><a href="/wybory/openWybory/{{ w.id }}">otwórz</a></td>
+						{% else %}
+							<td><a href="/wybory/closeWybory/{{ w.id }}">zamknij</a></td>
+						{% endif %}
+					{% endif %}
+			</tr>
+			{% else %}
+				{% if user.is_superuser %}
+				<tr colspan=4>
+				{% else %}
+				<tr colspan=3>
+				{% endif %}
+						{% if w.zamkniete %}
+							<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
+						{% else %}
+							<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
+						{% endif %}	
+				</tr>
+			{% endif %}
+		{% endfor %}
+		</table>
+{% endblock %}

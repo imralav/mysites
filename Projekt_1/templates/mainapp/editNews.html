@@ -1,0 +1,12 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+		<form class="edit_news" method="post" action="/wybory/editnews/{{ whichId }}/">
+	        {% csrf_token %}
+	        {% for form in news_form.visible_fields %}
+	        	<p>{{ form.name|capfirst }}</p>
+	        	{{ form }}
+	        {% endfor %}
+	        <input type="submit" name="submit" value="Edytuj post"/>
+		</form>
+{% endblock %}

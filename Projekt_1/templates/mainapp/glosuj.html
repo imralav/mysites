@@ -1,0 +1,32 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+<div id="voting">
+	{% if kandydaci %}
+		{% if blad %}
+			<p> {{ error }} </p>
+		{% else %}
+			<h3>Kandydaci:</h3>
+			<form class="glosowanie" id="glosowanie" method="post" action="/wybory/glosuj/{{ wybory.id }}/">
+		        {% csrf_token %}
+		        {% for k in kandydaci %}
+		       		{% if wybory.ilosc_wyborow > 1 %}
+		        		<input type="checkbox" name="kandydat" value={{ k.id }}>{{ k }}<br>
+		        	{% else %}
+		        		<input type="radio" name="kandydat" value={{ k.id }}>{{ k }}<br>
+		        	{% endif %}
+		        {% endfor %}
+		        <input type="submit" value="Głosuj" />
+		    </form>
+		{% endif %}
+    {% else %}
+    	{% if blad %}
+			<p> {{ error }} </p>
+    		<a href="/wybory/details/{{ wybory.id }}/">Wróć do wyborów.</a>
+		{% else %}
+    		<p>Dziękujemy za zagłosowanie. Wyniki zostaną udostępnione, gdy głosowanie się zakończy.</p>
+    		<a href="/wybory/details/{{ wybory.id }}/">Wróć do wyborów.</a>
+    	{% endif %}
+   	{% endif %}
+</div>
+{% endblock %}
