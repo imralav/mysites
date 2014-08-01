@@ -1,6 +1,4 @@
-var FirstGame = {};
 
-var static_path = '/static/games/FirstGame/';
 
 FirstGame.Main = function (game) {
     
@@ -8,8 +6,6 @@ FirstGame.Main = function (game) {
 
 FirstGame.Main.prototype = {
     preload: function() {
-        this.game.stage.backgroundColor = '#000011';
-        this.game.load.image('logo',static_path + 'img/Phaser-Logo-Small.png');
     },
     
     create: function () {

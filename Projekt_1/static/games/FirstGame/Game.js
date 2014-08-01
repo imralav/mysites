@@ -65,7 +65,6 @@ var increaseStarButton;
 var increaseStarCapacityButton;
 var increaseShipButton;
 
-var static_path = '/static/games/FirstGame/';
 
 FirstGame.Game.prototype = {
     
@@ -154,23 +153,6 @@ FirstGame.Game.prototype = {
     },
     
     preload: function() {
-        this.game.load.image('SpaceShip',static_path + 'img/ship.png');
-        this.game.load.image('Star',static_path + 'img/star.png');
-        
-        this.game.load.audio('backgroundMusic', [static_path + "audio/creep.mp3",static_path + "audio/creep.ogg"]);
-        this.game.load.audio('catchStarSound', static_path + "audio/dropmetalthing.ogg");
-        
-        this.game.load.image('arrow', static_path + 'img/ui/icon-green-arrow.png');
-        this.game.load.image('toppanel', static_path + 'img/ui/staroverflow_gui_1.png');
-        this.game.load.image('leftpanel', static_path + 'img/ui/staroverflow_gui_2.png');
-        this.game.load.image('rightpanel', static_path + 'img/ui/staroverflow_gui_3.png');
-        this.game.load.image('bottompanel', static_path + 'img/ui/staroverflow_gui_4.png');
-        
-        this.game.load.spritesheet('pausebutton', static_path + 'img/ui/pausebutton.png', 161, 43, 2);
-        
-        this.game.load.bitmapFont('coalition',static_path + 'font/font.png',static_path + 'font/font.fnt');
-        
-        this.game.load.spritesheet('lowbutton', static_path + 'img/ui/lowerbutton.png', 304, 54, 2);
     },
         
     create: function() {
