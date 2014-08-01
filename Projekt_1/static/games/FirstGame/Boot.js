@@ -1,5 +1,5 @@
 var FirstGame = {};
-
+var static_path = "/static/games/FirstGame/";
 FirstGame.Boot = function (game) {
 
 };
@@ -9,7 +9,7 @@ FirstGame.Boot.prototype = {
     preload: function () {
 
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
-        this.load.image('preloaderBar', 'img/ui/lowerbutton2.png');
+        this.load.image('preloaderBar', static_path + 'img/ui/lowerbutton2.png');
 
     },
 

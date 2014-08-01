@@ -4,6 +4,7 @@ FirstGame.Main = function (game) {
     
 };
 
+var static_path = "/static/games/FirstGame/";
 FirstGame.Main.prototype = {
     preload: function() {
     },

@@ -2,6 +2,8 @@ FirstGame.Game = function (game) {
     
 };
 
+var static_path = "/static/games/FirstGame/";
+
 var music;
 var catchStarSound;
 

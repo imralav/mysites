@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/static/games/FirstGame/style.css"/>
     <script src="/static/games/FirstGame/phaser.min.js"></script>
     <script src="/static/games/FirstGame/Boot.js"></script>
+    <script src="/static/games/FirstGame/Preloader.js"></script>
     <script src="/static/games/FirstGame/Main.js"></script>
     <script src="/static/games/FirstGame/Game.js"></script>
 {% endblock %}
@@ -20,10 +21,12 @@
 	    //create new game
 	    var game = new Phaser.Game(1200,600,Phaser.AUTO,'gameContainer');
 	    //add states to the game
-	    game.state.add('Main', FirstGame.Main);
-	    game.state.add('Game', FirstGame.Game);
-	    
-	    game.state.start('Main');
+    game.state.add('Boot', FirstGame.Boot);
+    game.state.add('Preloader', FirstGame.Preloader);
+    game.state.add('Main', FirstGame.Main);
+    game.state.add('Game', FirstGame.Game);
+    
+    game.state.start('Boot');
 	    //game.state.start('Game');
 	}
 	</script>

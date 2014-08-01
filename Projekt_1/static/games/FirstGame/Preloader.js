@@ -1,4 +1,5 @@
 
+var static_path = "/static/games/FirstGame/";
 FirstGame.Preloader = function (game) {
 
 	this.preloadBar = null;
@@ -29,26 +30,26 @@ FirstGame.Preloader.prototype = {
 		//	+ lots of other required assets here
         
         this.game.stage.backgroundColor = '#000011';
-        this.load.image('logo','img/Phaser-Logo-Small.png');
+        this.load.image('logo',static_path + 'img/Phaser-Logo-Small.png');
         
         
-        this.load.image('SpaceShip','img/ship.png');
-        this.load.image('Star','img/star.png');
+        this.load.image('SpaceShip',static_path + 'img/ship.png');
+        this.load.image('Star',static_path + 'img/star.png');
         
-        this.load.audio('backgroundMusic', ["audio/creep.mp3","audio/creep.ogg"]);
-        this.load.audio('catchStarSound', "audio/dropmetalthing.ogg");
+        this.load.audio('backgroundMusic', [static_path + "audio/creep.mp3",static_path + "audio/creep.ogg"]);
+        this.load.audio('catchStarSound', static_path + "audio/dropmetalthing.ogg");
         
-        this.load.image('arrow', 'img/ui/icon-green-arrow.png');
-        this.load.image('toppanel', 'img/ui/staroverflow_gui_1.png');
-        this.load.image('leftpanel', 'img/ui/staroverflow_gui_2.png');
-        this.load.image('rightpanel', 'img/ui/staroverflow_gui_3.png');
-        this.load.image('bottompanel', 'img/ui/staroverflow_gui_4.png');
+        this.load.image('arrow', static_path + 'img/ui/icon-green-arrow.png');
+        this.load.image('toppanel', static_path + 'img/ui/staroverflow_gui_1.png');
+        this.load.image('leftpanel', static_path + 'img/ui/staroverflow_gui_2.png');
+        this.load.image('rightpanel', static_path + 'img/ui/staroverflow_gui_3.png');
+        this.load.image('bottompanel', static_path + 'img/ui/staroverflow_gui_4.png');
         
-        this.load.spritesheet('pausebutton', 'img/ui/pausebutton.png', 161, 43, 2);
+        this.load.spritesheet('pausebutton', static_path + 'img/ui/pausebutton.png', 161, 43, 2);
         
-        this.load.bitmapFont('coalition','font/font.png','font/font.fnt');
+        this.load.bitmapFont('coalition',static_path + 'font/font.png',static_path + 'font/font.fnt');
         
-        this.load.spritesheet('lowbutton', 'img/ui/lowerbutton.png', 304, 54, 2);
+        this.load.spritesheet('lowbutton', static_path + 'img/ui/lowerbutton.png', 304, 54, 2);
 
 	},
 
