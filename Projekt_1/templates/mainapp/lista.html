@@ -6,9 +6,9 @@
 			{% if user = w.ktoStworzyl or user.is_superuser %}
 			<tr>
 				{% if w.zamkniete %}
-					<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
+					<td><a href="/wybory/details/{{ w.id }}/">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
 				{% else %}
-					<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
+					<td><a href="/wybory/details/{{ w.id }}/">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
 				{% endif %}			
 					{% if not w.zamkniete %}	
 					<td><a class="election_utils" href="/wybory/editWybory/{{ w.id }}/">edytuj</a></td>
@@ -29,9 +29,9 @@
 				<tr colspan=3>
 				{% endif %}
 						{% if w.zamkniete %}
-							<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
+							<td><a href="/wybory/details/{{ w.id }}/">{{ w }} ({{ w.poczatek }} - {{ w.koniec }}) *ZAMKNIĘTE*</a></td>
 						{% else %}
-							<td><a href="/wybory/details/{{ w.id }}">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
+							<td><a href="/wybory/details/{{ w.id }}/">{{ w }} ({{ w.poczatek }} - {{ w.koniec }})</a></td>
 						{% endif %}	
 				</tr>
 			{% endif %}
